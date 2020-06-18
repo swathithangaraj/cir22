@@ -1,3 +1,2 @@
-FROM alpine:3.8
-    
-ENTRYPOINT [ "echo" ]
+FROM nginx:alpine
+COPY . /usr/share/nginx/html
