@@ -1,8 +1,21 @@
-version: 2.0
+version: 2
 jobs:
   build:
+    environment:
+      IMAGE_NAME: swathithangaraj/building-on-ci
     docker:
-      - image: circleci/ruby:2.4.2-jessie-node
+      - image: circleci/buildpack-deps:stretch
     steps:
       - checkout
-      - run: echo "Hello World"
+      - setup_remote_docker
+      - run:
+          name: Build Docker image
+          command: ls
+workflows:
+  version: 2
+  build-master:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master
